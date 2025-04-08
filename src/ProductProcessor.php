@@ -7,14 +7,22 @@ class ProductProcessor
 {
     public function process(string $file, string $outputFile)
     {
-        echo "Opening file: $file\n";
         $combinations = [];
 
-        foreach (CsvParser::parse($file) as $data) {
-            echo "Parsing row\n";
-            $product = new Product($data);
-            echo $product . PHP_EOL;
+        $mapping = [
+            'brand_name'    => 'make',
+            'model_name'    => 'model',
+            'colour_name'   => 'colour',
+            'gb_spec_name'  => 'capacity',
+            'network_name'  => 'network',
+            'grade_name'    => 'grade',
+            'condition_name'=> 'condition',
+        ];
 
+        foreach (CsvParser::parse($file, $mapping) as $data) {
+            $product = new Product($data);
+            //echo $product . PHP_EOL;
+            
             $key = $product->getKey();
             if (!isset($combinations[$key])) {
                 $combinations[$key] = ['product' => $product, 'count' => 0];
@@ -22,7 +30,6 @@ class ProductProcessor
             $combinations[$key]['count']++;
         }
 
-        echo "Saving results to $outputFile\n";
         $handle = fopen($outputFile, 'w');
         fputcsv($handle, ['make', 'model', 'colour', 'capacity', 'network', 'grade', 'condition', 'count']);
 
@@ -35,7 +42,6 @@ class ProductProcessor
         }
 
         fclose($handle);
-        echo "Done.\n";
-
     }
 }
+

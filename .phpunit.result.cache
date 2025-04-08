@@ -1,0 +1,1 @@
+{"version":1,"defects":{"CsvParserTest::testParsesCsvCorrectly":4,"ProductProcessorTest::testProcessesAndWritesCombinationFile":4},"times":{"ProductTest::testProductInitialization":0,"ProductTest::testMissingRequiredFieldThrowsException":0.002,"CsvParserTest::testParsesCsvCorrectly":0.008,"ProductProcessorTest::testProcessesAndWritesCombinationFile":0.007}}

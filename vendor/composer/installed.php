@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'gokul/supplier-product-processor',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'fefc777411c59ece0aed65b9304cdb17b508f380',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => true,
         ),
         'gokul/supplier-product-processor' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'fefc777411c59ece0aed65b9304cdb17b508f380',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

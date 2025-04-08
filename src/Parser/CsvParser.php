@@ -14,38 +14,31 @@ class CsvParser
         'condition_name'=> 'condition',
     ];
 
-    public static function parse($filepath)
+    public static function parse(string $filename, array $mapping = []): \Generator
     {
-        $delimiter = self::detectDelimiter($filepath);
-        $handle = fopen($filepath, 'r');
-        if (!$handle) {
-            throw new \Exception("Cannot open file: $filepath");
+        //echo "Opening file: $filename\n";
+        if (!file_exists($filename)) {
+            throw new \Exception("File not found: $filename");
         }
-
-        $headers = fgetcsv($handle, 0, $delimiter);
-        $headers = array_map('trim', $headers);
-        $headers = array_map(fn($h) => strtolower(str_replace('"', '', $h)), $headers);
-
-        $mapped = [];
-        foreach ($headers as $i => $header) {
-            $mapped[$i] = self::$headerMap[$header] ?? null;
+    
+        $handle = fopen($filename, 'r');
+        $headers = fgetcsv($handle);
+    
+        // Apply mapping
+        if (!empty($mapping)) {
+            $headers = array_map(function ($header) use ($mapping) {
+                return $mapping[$header] ?? $header;
+            }, $headers);
         }
-
-        while (($row = fgetcsv($handle, 0, $delimiter)) !== false) {
-            $productData = [];
-
-            foreach ($row as $i => $val) {
-                $key = $mapped[$i];
-                if ($key !== null) {
-                    $productData[$key] = trim(str_replace('"', '', $val));
-                }
-            }
-
-            yield $productData;
+    
+        while (($row = fgetcsv($handle)) !== false) {
+            $data = array_combine($headers, $row);
+            yield $data;
         }
-
+    
         fclose($handle);
     }
+    
 
     private static function detectDelimiter($file)
     {
