@@ -2,7 +2,7 @@
 
 This PHP command-line tool processes different types of product data files (like CSV/TSV), standardizes them into product objects, and generates a report of unique product combinations with counts.
 
-## 🛠 Features
+## Features
 
 - Parses CSV/TSV product files with different formats.
 - Supports custom field mappings to handle various header names.
