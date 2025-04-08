@@ -21,7 +21,7 @@ class ProductProcessor
 
         foreach (CsvParser::parse($file, $mapping) as $data) {
             $product = new Product($data);
-            //echo $product . PHP_EOL;
+            echo $product . PHP_EOL;
             
             $key = $product->getKey();
             if (!isset($combinations[$key])) {

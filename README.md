@@ -18,6 +18,7 @@ This PHP command-line tool processes different types of product data files (like
 
 ### Installation
 
+Open your terminal in the project folder:
 
 ```bash
 composer install
